@@ -1,3 +1,4 @@
+import { mainnetCloseFeeUSDC } from "./lib/mainnet-demo";
 import React, { useEffect, useMemo, useState } from "react";
 import { useAccount, useConnect, useDisconnect, useWalletClient } from "wagmi";
 import {
@@ -664,6 +665,7 @@ export default function App() {
                   data: input.data,
                   value: input.value,
                   nonce: input.nonce,
+                  ...(input.feeLimits ?? {}),
                 }),
             },
           }),
@@ -1802,6 +1804,7 @@ export default function App() {
           >
             <h2 id="review-title">{review.title}</h2>
             <p>Review the exact call before opening your wallet.</p>
+            {manifest?.environment === "arc-mainnet" && <p className="notice">Mainnet demo: only the approved operator can close group #1. Maximum network fee: {mainnetCloseFeeUSDC} USDC. Do not increase the wallet fee limits.</p>}
             <dl>
               <dt>Signer</dt>
               <dd className="address">{signer}</dd>

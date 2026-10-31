@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "network": "local-arc-vm",
+  "tests": {
+    "Success": 177,
+    "Failure": 0,
+    "Skipped": 0
+  },
+  "runtimeBytes": 24475,
+  "sameReviewedRuntime": true,
+  "sameSources": true,
+  "originalHarnessSha256": "4654d04b8f89d4d9d449948c15fec9f195d4264490f0d8058cc08cad63a55fb4",
+  "adaptedHarnessSha256": "e4e815e1a124a800a760598803950aa7f8710d0cecface3f243fe77d7ec51809",
+  "adaptation": "Add --network arc and isolate evidence outputs; all assertions and release bytecode deployment retained.",
+  "publicNetworkTransactions": 0
+}

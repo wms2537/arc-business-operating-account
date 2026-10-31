@@ -14,3 +14,6 @@ contracts/release-cache/
 __pycache__/
 *.pyc
 public/rehearsal/
+
+# Runtime demo evidence is exported deliberately after verification.
+docs/evidence/arc-mainnet/rehearsal/

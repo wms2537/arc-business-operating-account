@@ -4,7 +4,7 @@ Can a business fund its next order without spending cash already promised elsewh
 
 This Arc Studio application puts protected cash, exact purchase terms, customer escrow, prefunded credit and accounting into one lifecycle. Customer orders and group purchases use the same non-upgradeable Solidity kernel. Owners keep distinct signing authority; funds share contract custody under explicit rules.
 
-**Current status: verified Arc Testnet prototype with locally verified mainnet network support. Mainnet deployment and public hosted app are not complete.** This is a controlled demonstration with fictional businesses and a prefunded lender. It is not a bank or commercial credit service.
+**Current status: verified Arc Testnet prototype and tested, human-operated mainnet preparation. Mainnet deployment and public hosted app are not complete.** This is a controlled demonstration with fictional businesses and a prefunded lender. It is not a bank or commercial credit service.
 
 [Arc Studio project](https://studio.arc.io/app/46704d22-91ee-404d-8ff7-7ad873e3c289) · [Testnet verification report](docs/reviews/arc-testnet-rehearsal-2026-10-31.md) · [Source provenance](docs/source-provenance.json)
 
@@ -21,7 +21,13 @@ Independent verification passed **1,393 public-chain checks across 140 transacti
 
 ## Mainnet adapter status
 
-The app now recognizes Arc Mainnet 5042 separately from Arc Testnet 5042002 and local Anvil 31337. Its parser, wallet chain, paced RPC, finalized event capture and native-USDC fee labels are covered by 17 network tests, including wrong-network and altered-runtime rejection. All 182 accounting and 47 browser regression checks still pass. Solidity is unchanged. This does not prove a live mainnet deployment; the primary mainnet RPC preflight returned HTTP403 in the build environment. [Adapter receipt](docs/evidence/mainnet-support-checks.json).
+The app now recognizes Arc Mainnet 5042 separately from Arc Testnet 5042002 and local Anvil 31337. Its parser, wallet chain, paced RPC, finalized event capture and native-USDC fee labels are covered by 17 network tests, including wrong-network and altered-runtime rejection. All 182 accounting and 47 browser regression checks still pass. Solidity is unchanged. This does not prove a live mainnet deployment. The official Blockdaemon alternate RPC is available; the primary RPC returned HTTP403 in the build environment. [Adapter receipt](docs/evidence/mainnet-support-checks.json).
+
+## Bounded mainnet preparation
+
+The owner approved a 0.75 USDC total demo budget. The preparation uses 0.225 USDC of business capital, fixed gas ceilings and dedicated keys retained privately on the owner Mac. The app permits one paid group-close attempt from the approved operator, passes its fee ceilings to the wallet, and blocks a second paid attempt after a revert. A human must execute financial actions. No mainnet transaction has been sent by this preparation work.
+
+The new operator and wallet tests passed 16 checks. Together with the existing network suite, Studio passed 33 unit checks, 182 accounting checks, 47 browser checks, type/lint checks and the production build. The operator/wallet tests also passed on the owner Mac. [Human-operated workflow](docs/mainnet-operator.md) · [Verification receipt](docs/evidence/mainnet-operator-checks.json).
 
 ## Run
 

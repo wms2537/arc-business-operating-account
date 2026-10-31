@@ -1,3 +1,4 @@
+import { mainnetDemoLimits, checkMainnetCloseQuote, type WalletFeeLimits } from "./mainnet-demo";
 import { type Address, type Hex, type PublicClient } from "viem";
 import {
   address,
@@ -138,6 +139,7 @@ type WalletBoundary = {
     value: bigint;
     nonce: number;
     chainId: number;
+    feeLimits?: WalletFeeLimits;
   }): Promise<Hex>;
 };
 function rejected(error: unknown): boolean {
@@ -170,6 +172,9 @@ export async function submitIntent({
     !sameAddress(to, manifest.usdcAddress)
   )
     throw Error("Transaction target is outside this deployment");
+  const feeLimits = mainnetDemoLimits(manifest, identity.address, to, data);
+  if (feeLimits && store.list().some(i => i.chainId === manifest.chainId && sameAddress(i.signer, identity.address) && i.state.kind !== "rejected"))
+    throw Error("A mainnet attempt is already recorded for this wallet. Use Recover status; do not submit another paid attempt before reviewing the remaining budget.");
   await validateDeployment(client, manifest);
   if (
     store
@@ -188,6 +193,10 @@ export async function submitIntent({
     blockTag: "pending",
   });
   await client.call({ account: identity.address, to, data, value: 0n });
+  if (feeLimits) {
+    const [estimate, latest, gasPrice] = await Promise.all([client.estimateGas({ account: identity.address, to, data, value: 0n }), client.getBlock(), client.getGasPrice()]);
+    checkMainnetCloseQuote(feeLimits, estimate, latest.baseFeePerGas, gasPrice);
+  }
   const again = await wallet.identity();
   if (
     !sameAddress(identity.address, again.address) ||
@@ -216,6 +225,7 @@ export async function submitIntent({
       value: 0n,
       nonce,
       chainId: manifest.chainId,
+      ...(feeLimits ? { feeLimits } : {}),
     });
     intent = { ...intent, state: { kind: "submitted", hash: hash(sent) } };
   } catch (error) {

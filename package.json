@@ -21,7 +21,11 @@
     "browser:test": "bun run tests/browser-fixtures.ts",
     "abi:generate": "bun run scripts/generate-kernel-abi.ts",
     "books:rebuild": "bun run server/index.ts --rebuild",
-    "test:networks": "bun test tests/network-support.test.ts"
+    "test:networks": "bun test tests/network-support.test.ts",
+    "mainnet:prepare": "bun run scripts/arc-mainnet-prepare.ts prepare",
+    "mainnet:funding": "bun run scripts/arc-mainnet-run.ts funding",
+    "mainnet:setup": "bun run scripts/arc-mainnet-run.ts setup",
+    "test:mainnet-operator": "bun test tests/mainnet-operator.test.ts tests/mainnet-wallet.test.ts"
   },
   "dependencies": {
     "@circle-fin/adapter-viem-v2": "^1.19.2",

@@ -1,0 +1,15 @@
+import { test, expect } from "bun:test";
+import { checkBudget, publicPlan, reviewedBytecode, ROLES, OWNER, ACTOR_FUNDING, CAPITAL, MAX_FEE, ACTOR_GAS_CAP } from "../scripts/arc-mainnet-prepare";
+import { ALLOCATIONS, enforceFeeBudget, validateFunding } from "../scripts/arc-mainnet-run";
+import { address } from "../src/lib/boundary";
+const actors=ROLES.map((name,i)=>({name,address:address("0x"+(i+1).toString(16).padStart(40,"0"))}));
+const budget={estimate:5500000n,gasPrice:25000000000n,baseFee:25000000000n,ownerBalance:1892914000000000000n};
+test("budget bounds owner outflow and deployment fees",()=>{const v=checkBudget(budget);expect(v.maxOwnerOutflow).toBe(679760000000000000n);expect(v.deploymentFeeCap).toBeLessThanOrEqual(200000000000000000n);});
+test("network spike cannot enlarge the fee ceiling",()=>{expect(()=>checkBudget({...budget,gasPrice:MAX_FEE+1n})).toThrow();expect(()=>checkBudget({...budget,baseFee:MAX_FEE})).toThrow();});
+test("unaffordable deployment stops before a funding request",()=>{expect(()=>checkBudget({...budget,estimate:7000000n})).toThrow();expect(()=>checkBudget({...budget,ownerBalance:749999999999999999n})).toThrow();});
+test("actor funding contains exactly the business capital and bounded gas",()=>{expect(ALLOCATIONS.reduce((s,a)=>s+a.business*1000000000000n,0n)).toBe(CAPITAL);expect(ALLOCATIONS.reduce((s,a)=>s+a.business*1000000000000n+a.gas,0n)).toBe(420000000000000000n);expect(ACTOR_FUNDING-CAPITAL).toBe(ACTOR_GAS_CAP);});
+test("actor fee reservations enforce their exact total cap",()=>{enforceFeeBudget(ACTOR_GAS_CAP-MAX_FEE,1n);expect(()=>enforceFeeBudget(ACTOR_GAS_CAP,1n)).toThrow();expect(()=>enforceFeeBudget(0n,0n)).toThrow();});
+test("plan binds the owner, actors, quantities and small amounts",()=>{const p=publicPlan(actors);expect(p.capitalMicroUSDC).toBe("225000");expect(p.group.principalMicroUSDC).toEqual(["16000","16500","12500"]);expect(publicPlan(actors).planSha256).toBe(p.planSha256);expect(publicPlan([...actors].reverse()).planSha256).not.toBe(p.planSha256);});
+test("duplicate, incomplete and owner-derived actor lists are rejected",()=>{expect(()=>publicPlan(actors.slice(1))).toThrow();expect(()=>publicPlan(actors.map(a=>({...a,address:actors[0].address})))).toThrow();expect(()=>publicPlan(actors.map((a,i)=>i===0?{...a,address:OWNER}:a))).toThrow();});
+test("funding validates exact network, recipient, value and fees",()=>{const tx={from:OWNER,to:actors[0].address,input:"0x",value:ACTOR_FUNDING,gas:21000n,maxFeePerGas:MAX_FEE,chainId:5042};validateFunding(tx,actors[0].address);for(const change of [{value:ACTOR_FUNDING+1n},{to:actors[1].address},{chainId:5042002},{input:"0x1234"},{gas:30001n},{maxFeePerGas:MAX_FEE+1n},{from:actors[1].address}])expect(()=>validateFunding({...tx,...change},actors[0].address)).toThrow();});
+test("release artifact matches the reviewed runtime and source",async()=>{expect((await reviewedBytecode()).length).toBeGreaterThan(40000);});

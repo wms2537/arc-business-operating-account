@@ -27,7 +27,9 @@
     "scripts/arc-testnet-rehearsal.ts",
     "scripts/arc-testnet-verify.ts",
     "scripts/arc-*.ts",
-    "tests/network-support.test.ts"
+    "tests/network-support.test.ts",
+    "tests/mainnet-operator.test.ts",
+    "tests/mainnet-wallet.test.ts"
   ],
   "exclude": [
     "tests/foundation-red.ts",

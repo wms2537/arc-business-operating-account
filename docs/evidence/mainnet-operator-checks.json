@@ -1,0 +1,91 @@
+{
+  "status": "passed",
+  "scope": "Preparation and pure checks only; no vault accessed, keys generated, signature, or transaction sent.",
+  "checks": [
+    {
+      "command": [
+        "bun",
+        "test",
+        "tests/mainnet-operator.test.ts",
+        "tests/mainnet-wallet.test.ts",
+        "tests/network-support.test.ts"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "bun",
+        "run",
+        "check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "bun",
+        "run",
+        "integration:test"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "bunx",
+        "vite",
+        "build"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "bun",
+        "run",
+        "browser:test"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "files": {
+    "scripts/arc-mainnet-prepare.ts": "d15f00ebd2f587604c8ec44cac5fc1178a069bfa1e01932ee79266ae2f017682",
+    "scripts/arc-mainnet-run.ts": "7a264597e15c8dc50f7528b8613019cf2f6ab2d7e69a8ae4aad100ac684de617",
+    "release/business-kernel.json": "09395ad6cb0e1cb34ca996b87a1b5eb6008873f50f3bb62651843c09f270817e",
+    "release/arc-vm-verification.json": "38d07b50512984cc4dbca7b4814d66b5daf1fce8240ae9f460cfb212f4b31996",
+    "src/lib/mainnet-demo.ts": "95d585b12e3e46c893dc007aabcff91d4cd346f84874b47c953a2f312559496e",
+    "src/lib/transactions.ts": "90b6d67701ee9af7200a23f1ec5fd8e1e06ad0b579a9c6b3809f581df156b626",
+    "src/App.tsx": "ca41b05e763f8dd237d64ef9f1a4d206f2d281e5ae99585c5c0953c0e1e52481",
+    "tests/mainnet-wallet.test.ts": "b171ef086418f9c35bd6ec12ad5892d01b28f4f904faea837b2bbb9d0e8d78aa",
+    "tests/mainnet-operator.test.ts": "8a755e5e8f24a6ad980b9c2fb00dba630374f83effcba6007dbc20fabf8ffce9",
+    "docs/mainnet-operator.md": "5366c4ca9dba60de02fbe71bbbfa19cf5b983573cf542295ab009136704ab821",
+    "package.json": "b062ad4af8074c432c5373dd4849013aae3d3ef764d522fe4ca6be95f57c0666",
+    "tsconfig.integration.json": "81ed0323afdce30793e2881833f0f7956f76b894bb9629ca9985b54cf5ab90d4",
+    "AGENTS.md": "8adf8cec17fba7c1855e1965a508d3d703d4bc7494060c1eb38bd5686d73c21e",
+    "docs/build-status.md": "1c644b1e5bfb595f1a34bad484b6392d4953441a1e641b565353863b38a1b3d9",
+    "docs/submission/2026-10-31/current-status.json": "a6939acae834687976dc3aef7ed37b72eb6e99bb8a20d872806faa7a5f4cf3cb"
+  },
+  "localSourceHashMatches": [
+    "scripts/arc-mainnet-prepare.ts",
+    "scripts/arc-mainnet-run.ts",
+    "release/business-kernel.json",
+    "release/arc-vm-verification.json",
+    "src/lib/mainnet-demo.ts",
+    "src/lib/transactions.ts",
+    "src/App.tsx",
+    "tests/mainnet-wallet.test.ts",
+    "tests/mainnet-operator.test.ts",
+    "docs/mainnet-operator.md",
+    "package.json",
+    "tsconfig.integration.json"
+  ],
+  "localChecks": {
+    "command": "bun test tests/mainnet-operator.test.ts tests/mainnet-wallet.test.ts",
+    "bunVersion": "1.2.5",
+    "passed": 16,
+    "failed": 0
+  },
+  "studioCounts": {
+    "unitTests": 33,
+    "accountingChecks": 182,
+    "browserChecks": 47
+  },
+  "humanExecution": "Not started; no mainnet vault accessed or transaction sent by the agent."
+}
