@@ -1,6 +1,6 @@
 import { type PublicClient } from "viem";
 import { KERNEL_ABI } from "../src/lib/kernel-abi";
-import { validateDeployment } from "../src/lib/deployment";
+import { validateDeployment, networkSettings } from "../src/lib/deployment";
 import { captureBlock, captureDeploymentRange } from "./chain";
 import { Books } from "./books";
 export async function syncBooks(
@@ -21,12 +21,12 @@ export async function syncBooks(
       ? latest
       : (await client.getBlock({ blockTag: "finalized" })).number;
   if (target === null) throw Error("Finalized block unavailable");
-  const batchLimit=books.manifest.environment==="arc-testnet"?Math.min(maxBlocks,100):maxBlocks;
+  const batchLimit=networkSettings(books.manifest.environment).arc?Math.min(maxBlocks,100):maxBlocks;
   const end =
     BigInt(p.height) + BigInt(batchLimit) < target
       ? BigInt(p.height) + BigInt(batchLimit)
       : target;
-  if(books.manifest.environment==='arc-testnet'){
+  if(networkSettings(books.manifest.environment).arc){
     for(const block of await captureDeploymentRange(client,BigInt(p.height)+1n,end,books.manifest))books.capture(block);
   }else{
     for(let n=BigInt(p.height)+1n;n<=end;n++)books.capture(await captureBlock(client,n));

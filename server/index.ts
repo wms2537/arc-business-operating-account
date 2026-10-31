@@ -4,6 +4,8 @@ import { resolve, sep } from "node:path";
 import { createPublicClient, http, type PublicClient } from "viem";
 import {
   parseManifest,
+  networkSettings,
+  deploymentRpcUrl,
   validateDeployment,
   type DeploymentManifest,
 } from "../src/lib/deployment";
@@ -34,10 +36,7 @@ for (const file of (process.env.BOOKS_MANIFESTS ?? "")
     process.env.ALLOW_LOCAL_CHAIN !== "1"
   )
     throw Error("Local-chain configuration requires ALLOW_LOCAL_CHAIN=1");
-  const rpcUrl =
-    manifest.environment === "local-anvil"
-      ? (process.env.LOCAL_RPC_URL ?? "http://127.0.0.1:18545")
-      : (process.env.ARC_RPC_URL ?? "https://rpc.testnet.arc.io");
+  const rpcUrl = deploymentRpcUrl(manifest.environment, process.env);
   const url = new URL(rpcUrl);
   if (
     !["http:", "https:"].includes(url.protocol) ||
@@ -49,7 +48,7 @@ for (const file of (process.env.BOOKS_MANIFESTS ?? "")
       resolve(dataDir, manifest.instanceId.slice(2) + ".sqlite"),
       manifest,
     ),
-    client = createPublicClient({ transport: manifest.environment === "arc-testnet" ? arcRpcTransport(rpcUrl) : http(rpcUrl) });
+    client = createPublicClient({ transport: networkSettings(manifest.environment).arc ? arcRpcTransport(rpcUrl) : http(rpcUrl) });
   runtimes.push({
     manifest,
     rpcUrl,

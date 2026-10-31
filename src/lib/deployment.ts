@@ -7,6 +7,7 @@ import {
   type PublicClient,
 } from "viem";
 import { KERNEL_ABI, RELEASE_ID } from "./kernel-abi";
+import { arc, arcTestnet, anvil } from "viem/chains";
 import {
   record,
   text,
@@ -18,8 +19,20 @@ import {
   sameAddress,
   json,
 } from "./boundary";
-export const ARC_TESTNET_USDC: Address =
+export const ARC_USDC: Address =
   "0x3600000000000000000000000000000000000000";
+export function networkSettings(environment: DeploymentManifest["environment"]) {
+ switch(environment) {
+  case "local-anvil": return { chain: anvil, label: "Local test chain", rpcKey: "LOCAL_RPC_URL", rpcUrl: "http://127.0.0.1:18545", feeAsset: "local ETH", arc: false };
+  case "arc-testnet": return { chain: arcTestnet, label: "Arc Testnet", rpcKey: "ARC_TESTNET_RPC_URL", rpcUrl: "https://rpc.testnet.arc.io", feeAsset: "native USDC", arc: true };
+  case "arc-mainnet": return { chain: arc, label: "Arc Mainnet", rpcKey: "ARC_MAINNET_RPC_URL", rpcUrl: "https://rpc.mainnet.arc.io", feeAsset: "native USDC", arc: true };
+  default: { const unreachable: never = environment; throw Error(`Unsupported deployment environment: ${String(unreachable)}`); }
+ }
+}
+export function deploymentRpcUrl(environment: DeploymentManifest["environment"], overrides: Record<string,string|undefined> = {}) {
+ const settings=networkSettings(environment);
+ return overrides[settings.rpcKey] ?? (environment === "arc-testnet" ? overrides.ARC_RPC_URL : undefined) ?? settings.rpcUrl;
+}
 export type JournalLine = {
   entity: string;
   account: string;
@@ -39,8 +52,8 @@ export type Opening = {
 };
 export type DeploymentManifest = {
   version: 2;
-  environment: "local-anvil" | "arc-testnet";
-  chainId: 31337 | 5042002;
+  environment: "local-anvil" | "arc-testnet" | "arc-mainnet";
+  chainId: 31337 | 5042002 | 5042;
   kernelAddress: Address;
   usdcAddress: Address;
   lenderAddress: Address;
@@ -92,14 +105,15 @@ export function parseManifest(value: unknown): DeploymentManifest {
     chainId = integer(v.chainId);
   if (!(
     (environment === "local-anvil" && chainId === 31337) ||
-    (environment === "arc-testnet" && chainId === 5042002)
+    (environment === "arc-testnet" && chainId === 5042002) ||
+    (environment === "arc-mainnet" && chainId === 5042)
   ))
-    throw Error("Only local Anvil and Arc testnet are supported");
-  if (chainId !== 31337 && chainId !== 5042002) throw Error("Invalid chain");
+    throw Error("Unsupported deployment environment or chain");
+  if (chainId !== 31337 && chainId !== 5042002 && chainId !== 5042) throw Error("Invalid chain");
   const usdcAddress = address(v.usdcAddress);
   if (
-    environment === "arc-testnet" &&
-    !sameAddress(usdcAddress, ARC_TESTNET_USDC)
+    environment !== "local-anvil" &&
+    !sameAddress(usdcAddress, ARC_USDC)
   )
     throw Error("Arc USDC mismatch");
   const sourceSha256 = text(v.sourceSha256);

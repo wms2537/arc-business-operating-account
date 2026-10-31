@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useAccount, useConnect, useDisconnect, useWalletClient } from "wagmi";
-import { anvil, arcTestnet } from "viem/chains";
 import {
   encodeFunctionData,
   keccak256,
@@ -22,7 +21,7 @@ import {
   type Snapshot,
   type PlanTerms,
 } from "./lib/kernel-client";
-import { validateDeployment } from "./lib/deployment";
+import { validateDeployment, networkSettings } from "./lib/deployment";
 import {
   address,
   uint,
@@ -573,7 +572,7 @@ export default function App() {
         : !isConnected || !signer
           ? "Connect the wallet that owns this action."
           : chainId !== manifest.chainId
-            ? `Switch your wallet to ${manifest.environment === "local-anvil" ? "Local Anvil" : "Arc Testnet"} (${manifest.chainId}).`
+            ? `Switch your wallet to ${networkSettings(manifest.environment).label} (${manifest.chainId}).`
             : !wallet
               ? "Wallet is connecting."
               : busy
@@ -660,7 +659,7 @@ export default function App() {
               send: (input) =>
                 wallet.sendTransaction({
                   account: checkedSigner,
-                  chain: input.chainId === 31337 ? anvil : arcTestnet,
+                  chain: networkSettings(deployment.manifest.environment).chain,
                   to: input.to,
                   data: input.data,
                   value: input.value,
@@ -769,9 +768,7 @@ export default function App() {
         <span className="status-dot" />
         <strong>
           {manifest
-            ? manifest.environment === "local-anvil"
-              ? "Local test chain"
-              : "Arc Testnet"
+            ? networkSettings(manifest.environment).label
             : "No deployment configured"}
         </strong>
         <span>

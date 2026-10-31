@@ -1,3 +1,4 @@
+import { networkSettings } from "../src/lib/deployment";
 import { isDeploymentTransaction } from "./chain";
 import { Database } from "bun:sqlite";
 import { createHash } from "node:crypto";
@@ -569,9 +570,7 @@ export class Books {
           tx.hash,
           tx.from,
           (uint(tx.gasUsed) * uint(tx.effectiveGasPrice)).toString(),
-          this.manifest.environment === "arc-testnet"
-            ? "native USDC"
-            : "local ETH",
+          networkSettings(this.manifest.environment).feeAsset,
           18,
           block.height,
         );

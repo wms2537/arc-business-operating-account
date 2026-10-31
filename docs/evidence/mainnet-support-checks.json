@@ -1,0 +1,47 @@
+{
+  "status": "passed-local-verification",
+  "networkUnitTests": 17,
+  "counts": {
+    "integration": 182,
+    "browser": 47
+  },
+  "results": [
+    {
+      "name": "check",
+      "exit": 0
+    },
+    {
+      "name": "network-unit",
+      "exit": 0
+    },
+    {
+      "name": "integration",
+      "exit": 0
+    },
+    {
+      "name": "build",
+      "exit": 0
+    },
+    {
+      "name": "browser",
+      "exit": 0
+    }
+  ],
+  "sourceSha256": {
+    "src/lib/deployment.ts": "926df7b96c4bc558a35506d82cbaf9eb3f731c55eae2e65547f99c93a52b41bb",
+    "server/index.ts": "553c7a5a103c7da37a7f6ee4cc635d7aea4027a05d1000461b433cd5e959de68",
+    "server/books.ts": "b67eef0d862cb0d3f6fd99423f0098b269e349dbfd017dbeef18445315dbd62b",
+    "server/sync.ts": "993abe0ec2b80d857d7ceae8c1b24df3b9479aad835edaadead4770748bb84ea",
+    "src/lib/app-api.ts": "74e7d4914164084a49e0c1b4676eb01b4cbc71327045ee2cf331ea48944fdcde",
+    "src/App.tsx": "a013c0a725aed3dae39da5eb45e2c2202bea4e61960536002c69d70cec265801",
+    "src/config.ts": "47f665c9149a1048edeae182c92e5fb8c039b7eef9202acdf75da20800f2a81a",
+    "tsconfig.integration.json": "f20015dec07283c67c915df47c555e290b548136a57681a1cb4abc5e05e1c794",
+    "package.json": "870ae1e0b306e66c0405f11d845993729dfc4dcbd700aaa6a587629c701aee88",
+    "tests/network-support.test.ts": "4b66ab247f2b75a169bf5168333e6d29f5041b44f4992e7a13937d4c06b109bd"
+  },
+  "mainnetDeployed": false,
+  "mainnetBroadcasts": 0,
+  "liveRpc": "primary mainnet endpoint returned HTTP403",
+  "contractSourceSha256": "768b5bff3015eab39363f7472f3dcaed3709025395e90d6620090d021523009b",
+  "runtimeNegativeCoverage": "missing, truncated and same-length replacement runtime rejected"
+}

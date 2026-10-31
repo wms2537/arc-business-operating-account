@@ -4,7 +4,7 @@ Can a business fund its next order without spending cash already promised elsewh
 
 This Arc Studio application puts protected cash, exact purchase terms, customer escrow, prefunded credit and accounting into one lifecycle. Customer orders and group purchases use the same non-upgradeable Solidity kernel. Owners keep distinct signing authority; funds share contract custody under explicit rules.
 
-**Current status: verified Arc Testnet prototype. Mainnet deployment and public hosted app are not complete.** This is a controlled demonstration with fictional businesses and a prefunded lender. It is not a bank or commercial credit service.
+**Current status: verified Arc Testnet prototype with locally verified mainnet network support. Mainnet deployment and public hosted app are not complete.** This is a controlled demonstration with fictional businesses and a prefunded lender. It is not a bank or commercial credit service.
 
 [Arc Studio project](https://studio.arc.io/app/46704d22-91ee-404d-8ff7-7ad873e3c289) · [Testnet verification report](docs/reviews/arc-testnet-rehearsal-2026-10-31.md) · [Source provenance](docs/source-provenance.json)
 
@@ -18,6 +18,10 @@ This Arc Studio application puts protected cash, exact purchase terms, customer 
 A real MetaMask testnet close paid **0.90 test USDC**, recorded **0.45 test principal**, and retained **0.10 per buyer**. The additional mixed demo still has that principal outstanding. The separate customer-order and group baseline runs repaid all principal.
 
 Independent verification passed **1,393 public-chain checks across 140 transactions**. Local evidence includes **177 Arc VM release tests**, **182 accounting checks** and **47 browser regressions**. These are separate verification scopes. [Actual testnet close](https://explorer.testnet.arc.io/tx/0x30218840328659d6090bcb964c36c63bddf9ce86f18d9d884f4ac83d5c10b81a).
+
+## Mainnet adapter status
+
+The app now recognizes Arc Mainnet 5042 separately from Arc Testnet 5042002 and local Anvil 31337. Its parser, wallet chain, paced RPC, finalized event capture and native-USDC fee labels are covered by 17 network tests, including wrong-network and altered-runtime rejection. All 182 accounting and 47 browser regression checks still pass. Solidity is unchanged. This does not prove a live mainnet deployment; the primary mainnet RPC preflight returned HTTP403 in the build environment. [Adapter receipt](docs/evidence/mainnet-support-checks.json).
 
 ## Run
 
@@ -36,6 +40,7 @@ The default configuration has no deployment and invents no balances. The fronten
 ```sh
 bun run check
 bun run check:integration
+bun run test:networks
 forge test
 python3 scripts/verify-release-artifact.py
 python3 docs/build-pack/tools/verify_fixtures.py

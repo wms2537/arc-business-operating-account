@@ -1,6 +1,6 @@
 import { arcRpcTransport } from "./arc-rpc";
 import { createPublicClient, http } from "viem";
-import { parseManifest } from "./deployment";
+import { parseManifest, networkSettings } from "./deployment";
 import {
   array,
   record,
@@ -42,7 +42,7 @@ export function parseDeployments(value: unknown) {
     return {
       manifest,
       rpcUrl,
-      client: createPublicClient({ transport: manifest.environment === "arc-testnet" ? arcRpcTransport(rpcUrl) : http(rpcUrl) }),
+      client: createPublicClient({ transport: networkSettings(manifest.environment).arc ? arcRpcTransport(rpcUrl) : http(rpcUrl) }),
     };
   });
 }

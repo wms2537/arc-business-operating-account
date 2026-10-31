@@ -20,7 +20,8 @@
     "check:integration": "tsc -p tsconfig.integration.json --noEmit",
     "browser:test": "bun run tests/browser-fixtures.ts",
     "abi:generate": "bun run scripts/generate-kernel-abi.ts",
-    "books:rebuild": "bun run server/index.ts --rebuild"
+    "books:rebuild": "bun run server/index.ts --rebuild",
+    "test:networks": "bun test tests/network-support.test.ts"
   },
   "dependencies": {
     "@circle-fin/adapter-viem-v2": "^1.19.2",
