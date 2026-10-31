@@ -1,0 +1,35 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "bun",
+      "node"
+    ],
+    "incremental": false,
+    "tsBuildInfoFile": "./node_modules/.tmp/integration.tsbuildinfo"
+  },
+  "include": [
+    "src/lib/boundary.ts",
+    "src/lib/kernel-abi.ts",
+    "src/lib/kernel-client.ts",
+    "src/lib/deployment.ts",
+    "src/lib/transactions.ts",
+    "src/lib/receipt-evidence.ts",
+    "server/books.ts",
+    "server/chain.ts",
+    "server/sync.ts",
+    "server/index.ts",
+    "tests/integration.ts",
+    "tests/browser.ts",
+    "tests/browser-fixtures.ts",
+    "tests/projection-worker.ts",
+    "scripts/arc-testnet-support.ts",
+    "scripts/arc-testnet-rehearsal.ts",
+    "scripts/arc-testnet-verify.ts",
+    "scripts/arc-*.ts"
+  ],
+  "exclude": [
+    "tests/foundation-red.ts",
+    "fork-tests"
+  ]
+}

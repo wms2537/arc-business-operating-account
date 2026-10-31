@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "scope": "Local EVM tests deploying release-profile creation bytecode; no Arc runtime or testnet claim.",
+  "runtime_bytes": 24475,
+  "runtime_template_sha256": "8042c4411d351a9d3f9b7961ec0a463607cfe42ebce7a870bf35e5c2013207f1",
+  "fixture_deployments_replaced": 30,
+  "tests": {
+    "Success": 177,
+    "Failure": 0,
+    "Skipped": 0
+  },
+  "source_sha256": {
+    "contracts/BusinessKernel.sol": "768b5bff3015eab39363f7472f3dcaed3709025395e90d6620090d021523009b",
+    "contracts/IBusinessKernel.sol": "38c02c51dc633f2bd4e922967b53e50ac0ab8323be0cce972c52190c9e283f3a",
+    "contracts/script/Create2Factory.sol": "4b2d23e8364e58e08460c39d6c26dced67b82b7e039c306c671245c4f012c38b",
+    "contracts/script/DeployCreate2.s.sol": "031692db152269016a8df83293d429f69f90dcb0e563ecc5366a257cbcf334a1",
+    "contracts/test/ReservationSequence.t.sol": "c589a51885aaa2782c15c06e5ad6e815e5182456711085748e1c80852f5597fb",
+    "contracts/test/LifecycleRegression.t.sol": "3ff437c65b8a51eb1359d303d17dc26aefa908a98fc4d1c4ef62f221318e986e",
+    "contracts/test/MockERC20.sol": "e5566f22ea8a336fcee03d61121e5ee1647f08d0034387f274a2b2e7a98141e4",
+    "contracts/test/ReentrancyTests.t.sol": "79e32880b2d02db33c992ead9acdeeb5e35d817c3275d8b0168b7bfa2d663969",
+    "contracts/test/ReadinessFundingRegression.t.sol": "0e22848e327d3f7b774cb58ed144dde5aecee9016d2bf8a3565ba8f2347c9033",
+    "contracts/test/ReceiptCheck.t.sol": "83c8b720268b5c1b44c6c71d3e31adc2c624fa80ade01f431ac25a2d4b1758ef",
+    "contracts/test/ContendTests.t.sol": "4ef80e7888e434196148f809efced97445ff7f143e0c3c0db1bcb55c46803319",
+    "contracts/test/SinglePool.t.sol": "c8c2aaa57d0280932a59b5c2b09ab3b0656e80454421b79b184cf51b52a019e8",
+    "contracts/test/ApprovalExpiry.t.sol": "c7b7d6a2e96cd2455ba81ea20587e54ac32534499cf4f094620e6821d96f4a77",
+    "contracts/test/PayoutRollbackRegression.t.sol": "2841855ac5b33889cdf2e80e2900a9a22076def3a93790972746f5fa4483a925",
+    "contracts/test/ContractSecurity.t.sol": "a5a8128f8f3273b7e6fd61a2f3eec8c6f17ee61536d2cecba9a3a9c26dc510ad",
+    "contracts/test/ScenarioB.t.sol": "26ba29eb7da8ad715028c627760645996ed11d339f6d1735804c8ffd128db304",
+    "contracts/test/ReceiptPaths.t.sol": "9dd4f29056adb1400e24cfca4c3276c5fbdb4aab7168e0b827deb785b73b4b6e",
+    "contracts/test/InvalidationRegression.t.sol": "85c5e6c3d79c82d32297275629a8b31f70b65e60ee391424c901971ba8cae898",
+    "contracts/test/VerificationBase.t.sol": "8679945ca0815f744d42dbd5a000ed76ed181f9fd83b26288d3b8e8b2a24b156",
+    "contracts/test/AuthorizationRegression.t.sol": "68e57af1d691346a141cf5cf658d48f9d1e63725590a240960eea8f6bc90acea",
+    "contracts/test/MinimumFill.t.sol": "1f1fe7ea80d52f9f8235b2ef6443a150ae377623808068f9ce36bdadd776f3b8",
+    "contracts/test/KernelBase.t.sol": "3a0ae56ef4408f30dcfad87fa40423e5245ee61846fbabad466bb31a9972a2bb",
+    "contracts/test/ScenarioA.t.sol": "1d5c7c187058b79c2d4622f62cd3c77e2dafd13f40b721fe403540876459f848"
+  },
+  "compiler": "0.8.28",
+  "release_profile": "via_ir=true, optimizer=true, optimizer_runs=1, evm_version=cancun"
+}

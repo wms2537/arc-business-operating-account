@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "bun",
+      "node"
+    ],
+    "incremental": false
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": []
+}

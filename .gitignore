@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+data/
+*.sqlite*
+*.log
+*.jsonl
+contracts/out/
+contracts/cache/
+contracts/release-out/
+contracts/release-cache/
+__pycache__/
+*.pyc
+public/rehearsal/

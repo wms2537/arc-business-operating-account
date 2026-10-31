@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "description": "Independent controlled fixtures. Monetary values are decimal strings at business scale, never floating point. Onchain demo divides monetary values by 1000.",
+  "settlement_asset": "USDC",
+  "erc20_decimals": 6,
+  "native_gas_decimals": 18,
+  "onchain_scale_divisor": 1000,
+  "interest_and_financing_fees": "0",
+  "gas": "Fund and account separately; excluded from the fixture conservation totals.",
+  "isolation": "Use fresh fixture deployments for canonical baselines. Live state cannot be reset. Separately test both workflow types competing for resources in one kernel deployment.",
+  "customer_order": {
+    "id": "customer-order-v1",
+    "sale_value": "10000",
+    "customer_initial_external_cash": "10000",
+    "merchant_initial_deposited_cash": "3000",
+    "merchant_protected_cash": "2000",
+    "merchant_own_reservation": "1000",
+    "lender_initial_deposited_cash": "2000",
+    "customer_refundable_escrow": "4000",
+    "loan_principal": "1500",
+    "supplier_payout": "6000",
+    "inbound_freight_payout": "500",
+    "remaining_customer_collection": "6000",
+    "supplier_quantity": 100,
+    "supplier_unit_price": "60",
+    "freight_quantity": 1,
+    "expected": {
+      "global_cash": "15000",
+      "kernel_before_customer_escrow": "5000",
+      "kernel_after_customer_escrow": "9000",
+      "kernel_after_close": "2500",
+      "kernel_after_collection": "8500",
+      "merchant_cash_after_close": "2000",
+      "lender_cash_after_close": "500",
+      "merchant_terminal_cash": "6500",
+      "lender_terminal_cash": "2000",
+      "terminal_customer_external_cash": "0",
+      "terminal_principal": "0",
+      "inventory_cost": "6500",
+      "merchant_simplified_profit_before_other_costs": "3500"
+    }
+  },
+  "collective_purchase": {
+    "id": "collective-purchase-v1",
+    "required_quantity": 100,
+    "supplier_capacity": 100,
+    "supplier_unit_price": "9",
+    "lender_initial_deposited_cash": "500",
+    "external_customer_initial_cash": "1000",
+    "external_customer_opening_payables": "450",
+    "buyers": [
+      {"id":"A","quantity":40,"initial_cash":"300","protected_cash":"100","own_reservation":"200","credit_reserved":"160","credit_limit":"200","supplier_allocation":"360","opening_receivable":"160"},
+      {"id":"B","quantity":35,"initial_cash":"250","protected_cash":"100","own_reservation":"150","credit_reserved":"165","credit_limit":"200","supplier_allocation":"315","opening_receivable":"165"},
+      {"id":"C","quantity":25,"initial_cash":"200","protected_cash":"100","own_reservation":"100","credit_reserved":"125","credit_limit":"200","supplier_allocation":"225","opening_receivable":"125"}
+    ],
+    "expected": {
+      "initial_buyer_cash":"750",
+      "protected_cash_total":"300",
+      "own_reservations_total":"450",
+      "credit_reservations_total":"450",
+      "supplier_payout":"900",
+      "principal_before_close":"0",
+      "principal_after_close":"450",
+      "lender_cash_after_close":"50",
+      "kernel_before_close":"1250",
+      "kernel_after_close":"350",
+      "kernel_after_collections":"800",
+      "terminal_buyer_cash":"300",
+      "terminal_lender_cash":"500",
+      "terminal_external_customer_cash":"550",
+      "terminal_principal":"0",
+      "global_cash":"2250"
+    },
+    "negative_fixtures": {
+      "incomplete_quantity":75,
+      "insufficient_lender_cash":"300",
+      "insufficient_supplier_capacity":99,
+      "second_lender_reservation_required":"165"
+    }
+  }
+}

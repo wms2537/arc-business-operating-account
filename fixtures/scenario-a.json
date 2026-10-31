@@ -1,0 +1,114 @@
+{
+  "_description": "Scenario A — Collective Purchase. All monetary amounts are FULL scenario scale (whole USDC). On-chain demo amounts divide every monetary value by 1000; quantities and IDs are unchanged.",
+  "_demoNote": "Supplier payout on-chain: 0.900000 USDC. Per-buyer principal: A=0.160000, B=0.165000, C=0.125000.",
+
+  "supplier": {
+    "unitPrice_usdc": 9,
+    "capacityUnits": 100,
+    "offerExpiry_seconds": 3600
+  },
+
+  "lender": {
+    "role": "Lender",
+    "initialDeposit_usdc": 500,
+    "label": "L1"
+  },
+
+  "externalCustomer": {
+    "initialCash_usdc": 1000,
+    "label": "ExtCust"
+  },
+
+  "buyers": [
+    {
+      "label": "A",
+      "role": "Buyer",
+      "quantity": 40,
+      "initialCash_usdc": 300,
+      "protectedFloor_usdc": 100,
+      "ownContribution_usdc": 200,
+      "loanAmount_usdc": 160,
+      "approvalCeiling_usdc": 200
+    },
+    {
+      "label": "B",
+      "role": "Buyer",
+      "quantity": 35,
+      "initialCash_usdc": 250,
+      "protectedFloor_usdc": 100,
+      "ownContribution_usdc": 150,
+      "loanAmount_usdc": 165,
+      "approvalCeiling_usdc": 200
+    },
+    {
+      "label": "C",
+      "role": "Buyer",
+      "quantity": 25,
+      "initialCash_usdc": 200,
+      "protectedFloor_usdc": 100,
+      "ownContribution_usdc": 100,
+      "loanAmount_usdc": 125,
+      "approvalCeiling_usdc": 200
+    }
+  ],
+
+  "phases": {
+    "abJoin": {
+      "description": "A and B join first (75 units). Holds: cash 350, credit 325. Debt remains 0.",
+      "totalUnits": 75,
+      "cashHold_usdc": 350,
+      "creditHold_usdc": 325,
+      "debt_usdc": 0
+    },
+    "cJoins": {
+      "description": "C joins. All holds: own 450, credit 450. Debt still 0.",
+      "totalUnits": 100,
+      "ownHold_usdc": 450,
+      "creditHold_usdc": 450,
+      "debt_usdc": 0
+    },
+    "afterCommit": {
+      "description": "Close: supplier paid 900. Each buyer retains 100. Lender retains 50.",
+      "supplierPayment_usdc": 900,
+      "buyerCashAfter_usdc": 100,
+      "lenderCashAfter_usdc": 50,
+      "principalPerBuyer": {
+        "A": 160,
+        "B": 165,
+        "C": 125
+      },
+      "openingReceivables": {
+        "A": 160,
+        "B": 165,
+        "C": 125
+      }
+    },
+    "afterCollection": {
+      "description": "Each buyer repays own principal only. Final: buyers 100 each, lender 500, supplier 900, external customer 550. Global cash 2250.",
+      "buyerCashFinal_usdc": 100,
+      "lenderCashFinal_usdc": 500,
+      "supplierCash_usdc": 900,
+      "externalCustomerCash_usdc": 550,
+      "globalCash_usdc": 2250
+    }
+  },
+
+  "failureCases": {
+    "insufficientAB75": {
+      "description": "Commit with only 75 units (A+B only) must fail — 100 units required.",
+      "expectRevert": true
+    },
+    "insufficientLenderCredit": {
+      "description": "Lender with only 300 USDC cannot cover A(160)+B(165)=325.",
+      "lenderDeposit_usdc": 300,
+      "requiredCredit_usdc": 325,
+      "expectRevert": true
+    },
+    "capacityShort": {
+      "description": "Supplier offer with only 99 capacity cannot fill 100-unit plan.",
+      "offerCapacity": 99,
+      "planQuantity": 100,
+      "expectRevert": true
+    }
+  }
+}

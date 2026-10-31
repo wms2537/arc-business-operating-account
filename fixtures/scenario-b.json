@@ -1,0 +1,77 @@
+{
+  "_description": "Scenario B — Customer Order. All monetary amounts are FULL scenario scale (whole USDC). On-chain demo amounts divide every monetary value by 1000; quantities and IDs are unchanged.",
+  "_demoNote": "Supplier payout on-chain: 6.000000 USDC. Freight: 0.500000. Principal: 1.500000. Final merchant: 6.500000.",
+
+  "sale": {
+    "amount_usdc": 10000,
+    "unitsFromOffer": 100,
+    "unitPrice_usdc": 60
+  },
+
+  "freight": {
+    "cost_usdc": 500
+  },
+
+  "merchant": {
+    "role": "Merchant",
+    "initialDeposit_usdc": 3000,
+    "protectedFloor_usdc": 2000,
+    "cashReservation_usdc": 1000,
+    "label": "Merchant"
+  },
+
+  "customer": {
+    "role": "Customer",
+    "externalInitialCash_usdc": 10000,
+    "escrowDeposit_usdc": 4000,
+    "label": "Customer"
+  },
+
+  "lender": {
+    "role": "Lender",
+    "initialDeposit_usdc": 2000,
+    "approvedReservation_usdc": 1500,
+    "label": "Lender"
+  },
+
+  "planAllocations": {
+    "customerEscrow_usdc": 4000,
+    "merchantCashContribution_usdc": 1000,
+    "creditContribution_usdc": 1500,
+    "totalPlanFunds_usdc": 6500
+  },
+
+  "commitPayouts": {
+    "supplierPayment_usdc": 6000,
+    "freightPayment_usdc": 500,
+    "merchantDebt_usdc": 1500,
+    "merchantCashPreserved_usdc": 2000,
+    "lenderCashAfterCommit_usdc": 500,
+    "customerExternalCashAfterCommit_usdc": 6000,
+    "kernelCashAfterCommit_usdc": 2500
+  },
+
+  "postCommitAccounting": {
+    "goodsAckAmount_usdc": 6000,
+    "freightAckAmount_usdc": 500,
+    "inventoryRecognized_usdc": 6500,
+    "saleRecognized_usdc": 10000,
+    "customerAdvanceApplied_usdc": 4000,
+    "receivableCreated_usdc": 6000
+  },
+
+  "collection": {
+    "customerPayment_usdc": 6000,
+    "waterfallLenderLiquidity_usdc": 1500,
+    "waterfallMerchantCash_usdc": 4500,
+    "finalMerchantCash_usdc": 6500,
+    "finalLenderBalance_usdc": 2000,
+    "finalPrincipal_usdc": 0,
+    "kernelFinalCash_usdc": 8500,
+    "supplierFinalCash_usdc": 6000,
+    "freightFinalCash_usdc": 500,
+    "customerFinalCash_usdc": 0,
+    "globalFinalCash_usdc": 15000,
+    "_note": "Internal lender repayment is reallocation of backed claims — not an external token transfer. Withdrawal is a separate real token transfer."
+  }
+}

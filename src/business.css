@@ -1,0 +1,535 @@
+.business-app {
+  max-width: 1240px;
+  margin: auto;
+  padding: 42px 32px 72px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.business-app button,
+.business-app input,
+.business-app select {
+  font: inherit;
+}
+.business-app button {
+  cursor: pointer;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 9px 14px;
+  transition: background 0.15s;
+}
+.business-app button:hover:not(:disabled) {
+  background: var(--surface-strong);
+}
+.business-app button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.business-app button.primary {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 650;
+}
+.business-app button:focus-visible,
+.business-app input:focus-visible,
+.business-app select:focus-visible,
+.business-app summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.topbar,
+.section-heading,
+.statusbar,
+.wallet-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.topbar {
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--border);
+}
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+.business-app h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 36px;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  margin: 8px 0 0;
+}
+.business-app h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 27px;
+  line-height: 1.25;
+  margin: 7px 0 10px;
+  letter-spacing: -0.025em;
+}
+.business-app h3 {
+  font-size: 17px;
+  margin: 0 0 14px;
+}
+.business-app h4 {
+  font-size: 13px;
+  margin: 20px 0 8px;
+}
+.business-app p {
+  color: var(--muted);
+}
+.business-app .hint {
+  font-size: 12px;
+  color: var(--subtle);
+}
+.statusbar {
+  justify-content: flex-start;
+  gap: 12px;
+  font-size: 12px;
+  padding: 16px 0;
+  color: var(--subtle);
+  flex-wrap: wrap;
+}
+.statusbar strong {
+  color: var(--ink);
+}
+.statusbar button {
+  margin-left: auto;
+}
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--warn);
+  border-radius: 50%;
+  flex: none;
+}
+.business-app nav {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 8px 0 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 30px;
+}
+.business-app nav button {
+  border-color: transparent;
+  background: transparent;
+  white-space: nowrap;
+  color: var(--subtle);
+}
+.business-app nav button.active {
+  background: var(--surface-strong);
+  color: var(--ink);
+  border-color: var(--border);
+}
+.section-heading {
+  margin: 26px 0 24px;
+  align-items: flex-end;
+}
+.section-heading p {
+  margin: 0;
+}
+.panel {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 24px;
+  border-radius: 16px;
+  min-width: 0;
+  margin-bottom: 22px;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+.metric {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 23px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.metric span {
+  color: var(--subtle);
+  font-size: 12px;
+}
+.metric strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 32px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.metric small {
+  color: var(--subtle);
+}
+.metric.accent {
+  border-color: rgba(172, 198, 233, 0.5);
+  background: rgba(172, 198, 233, 0.1);
+}
+.business-app .field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--subtle);
+  min-width: 0;
+  margin: 12px 0;
+}
+.business-app input,
+.business-app select {
+  padding: 10px 11px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: #122238;
+  color: var(--ink);
+  min-width: 0;
+  width: 100%;
+  color-scheme: dark;
+}
+.business-app input[readonly] {
+  opacity: 0.6;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+.action-form {
+  border-top: 1px solid var(--border);
+  padding: 14px 0;
+}
+.action-form summary {
+  cursor: pointer;
+  font-weight: 550;
+  list-style-position: inside;
+}
+.action-form form {
+  padding: 8px 0;
+}
+.action-form button {
+  margin-top: 10px;
+}
+.business-app fieldset {
+  border: 1px solid var(--border);
+  margin: 20px 0;
+  border-radius: 10px;
+  padding: 15px;
+}
+.business-app legend {
+  color: var(--accent);
+}
+.business-app dl {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: 13px 18px;
+}
+.business-app dt {
+  color: var(--subtle);
+  font-size: 12px;
+}
+.business-app dd {
+  margin: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.address {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.operation-list {
+  margin-bottom: 26px;
+}
+.business-app .operation-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 22px;
+  background: var(--surface);
+  padding: 22px;
+  text-align: left;
+  border-radius: 12px;
+  margin: 10px 0;
+}
+.operation-row > span:nth-child(2) {
+  flex: 1;
+}
+.operation-row small {
+  display: block;
+  color: var(--subtle);
+  margin-top: 4px;
+}
+.operation-id {
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--accent);
+}
+.pill {
+  padding: 4px 9px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.readiness {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 18px 22px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 20px 0;
+  color: var(--subtle);
+}
+.readiness strong {
+  color: var(--ink);
+}
+.compact-row,
+.timeline-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid var(--border);
+  padding: 14px 0;
+}
+.compact-row span,
+.timeline-row span {
+  color: var(--subtle);
+  font-size: 12px;
+}
+.table-wrap {
+  overflow: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+th,
+td {
+  padding: 13px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  color: var(--subtle);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.number {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.table-wrap small {
+  color: var(--subtle);
+}
+.empty-state {
+  padding: 35px;
+  background: rgba(172, 198, 233, 0.045);
+  border: 1px dashed rgba(172, 198, 233, 0.3);
+  border-radius: 16px;
+  margin-bottom: 28px;
+}
+.empty-state h2 {
+  font-size: 31px;
+  max-width: 650px;
+}
+.empty-state p {
+  max-width: 680px;
+}
+.empty-facts {
+  display: flex;
+  gap: 50px;
+  margin-top: 26px;
+  font-size: 12px;
+  color: var(--subtle);
+}
+.empty-facts strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+.error,
+.notice {
+  padding: 14px 18px;
+  border-radius: 10px;
+  overflow-wrap: anywhere;
+}
+.business-app .error {
+  color: #ffc1c8;
+  background: rgba(232, 109, 122, 0.09);
+  border: 1px solid rgba(232, 109, 122, 0.3);
+}
+.business-app .notice {
+  background: rgba(172, 198, 233, 0.08);
+  color: var(--accent);
+  border: 1px solid var(--border);
+}
+.success {
+  color: var(--success) !important;
+}
+.transaction-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+}
+.transaction-row > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.transaction-row small {
+  color: var(--subtle);
+}
+.transaction-row button {
+  flex: none;
+}
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.72);
+  display: grid;
+  place-items: center;
+  padding: 22px;
+}
+.review-dialog {
+  width: min(680px, 100%);
+  max-height: 90dvh;
+  overflow: auto;
+  background: #14243a;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 20px 80px #0006;
+}
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+.business-app pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 11px;
+  background: #0d1b2f;
+  padding: 18px;
+  border-radius: 8px;
+}
+.business-app footer {
+  font-size: 11px;
+  color: var(--subtle);
+  margin-top: 35px;
+  max-width: 800px;
+}
+.deployment-picker {
+  max-width: 500px;
+}
+@media (max-width: 720px) {
+  .business-app {
+    padding: 24px 18px 75px;
+  }
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .business-app h1 {
+    font-size: 31px;
+  }
+  .split {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .panel {
+    padding: 19px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .metrics {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .metric {
+    padding: 18px 14px;
+  }
+  .metric strong {
+    font-size: 26px;
+  }
+  .statusbar {
+    font-size: 11px;
+  }
+  .empty-state {
+    padding: 24px;
+  }
+  .empty-state h2 {
+    font-size: 27px;
+  }
+  .empty-facts {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .business-app dl {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .business-app dd {
+    text-align: left;
+    margin-bottom: 12px;
+  }
+  .business-app .operation-row {
+    gap: 12px;
+    padding: 17px 13px;
+  }
+  .operation-row .pill {
+    font-size: 10px;
+  }
+  .transaction-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .dialog-backdrop {
+    padding: 12px;
+  }
+  .review-dialog {
+    padding: 22px;
+  }
+  .wallet-control {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .business-app * {
+    transition: none !important;
+  }
+}
