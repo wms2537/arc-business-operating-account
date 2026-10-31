@@ -4,7 +4,7 @@ Can a business fund its next order without spending cash already promised elsewh
 
 This Arc Studio application puts protected cash, exact purchase terms, customer escrow, prefunded credit and accounting into one lifecycle. Customer orders and group purchases use the same non-upgradeable Solidity kernel. Owners keep distinct signing authority; funds share contract custody under explicit rules.
 
-**Current status: the public Cloudflare Workers app completed a verified Arc mainnet purchase on 1 November 2026.** It paid 0.09 USDC to the demo supplier, recorded 0.045 USDC of borrower principal and retained 0.01 USDC for each buyer. The principal remains outstanding. Competition submission is pending. This is a controlled demonstration with fictional businesses and a prefunded lender, not a bank or commercial credit service.
+**Current status: the public Cloudflare Workers app completed a verified Arc mainnet purchase on 1 November 2026.** It paid 0.09 USDC to the demo supplier, recorded 0.045 USDC of borrower principal and retained 0.01 USDC for each buyer. The principal remains outstanding. The [Arc Microgrants submission](https://dorahacks.io/build/50661) is under review. This is a controlled demonstration with fictional businesses and a prefunded lender, not a bank or commercial credit service.
 
 [Public mainnet app](https://arc-business-operating-account.swmengappdev.workers.dev/) · [Arc Studio project](https://studio.arc.io/app/46704d22-91ee-404d-8ff7-7ad873e3c289) · [Testnet verification report](docs/reviews/arc-testnet-rehearsal-2026-10-31.md) · [Source provenance](docs/source-provenance.json)
 

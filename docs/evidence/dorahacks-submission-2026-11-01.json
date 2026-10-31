@@ -1,0 +1,20 @@
+{
+  "status": "submitted-under-review",
+  "buildId": 50661,
+  "buildName": "Arc Business Operating Account",
+  "buildUrl": "https://dorahacks.io/build/50661",
+  "competition": "Arc Microgrants: Built with Arc Studio",
+  "competitionUrl": "https://dorahacks.io/hackathon/arc-microgrants-2/detail",
+  "statusUrl": "https://dorahacks.io/hackathon/arc-microgrants-2/build",
+  "confirmationHeading": "Build Submitted!",
+  "confirmationStatus": "The named Build has been submitted to the named hackathon and is now under review.",
+  "ownerApprovedTermsAndSubmission": true,
+  "finalParticipantAgreementAccepted": true,
+  "organizerNarrativeCharacters": 942,
+  "confirmedAt": "2026-10-31T16:44:25.917226+00:00",
+  "evidence": "Visible DoraHacks confirmation dialog after Submit for Review; Manage Submission replaced Submit Build.",
+  "confirmationScreenshotSha256": "ba87f4d62981bd70caf9e3314b490ae1a1eef28d5a8fb9e77020f74350c054eb",
+  "publicApp": "https://arc-business-operating-account.swmengappdev.workers.dev/",
+  "publicVideo": "https://arc-business-operating-account.swmengappdev.workers.dev/demo/",
+  "mainnetTransaction": "0x38e80b478e7ed0c3158d270d1364e0df648c08b25353e3bc3ef5cd55221d03bd"
+}

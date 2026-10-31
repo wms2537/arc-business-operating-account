@@ -44,3 +44,7 @@ MetaMask displayed a malicious-site warning for the public origin during this co
 Codex assisted development, review, browser operation, verification and export. The contracts, app and checks were developed or verified within the same Arc Studio project. The deployed Workers source matches the recorded Studio checkpoint. Mainnet signing remained with the owner.
 
 [Mainnet walkthrough](https://arc-business-operating-account.swmengappdev.workers.dev/demo/) · [Direct MP4](https://arc-business-operating-account.swmengappdev.workers.dev/demo/mainnet-walkthrough.mp4)
+
+## Submission status
+
+DoraHacks confirmed the existing Build was submitted to Arc Microgrants and is under review on 1 November 2026. The owner approved both final agreements. [Build](https://dorahacks.io/build/50661) · [Submission receipt](evidence/dorahacks-submission-2026-11-01.json).
