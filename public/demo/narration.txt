@@ -1,0 +1,13 @@
+Arc Business Operating Account asks whether a business can fund its next order without spending cash already promised elsewhere. We built and checked the contract, app, and accounting in this Arc Studio workspace. Codex assisted with review, browser operation, and verified exports. This is a controlled demonstration using real USDC on Arc mainnet, with fictional, owner-controlled businesses.
+
+This review was captured before the owner signed. Three buyers commit one hundred goods units. Their own cash and prefunded credit pay zero point zero nine USDC to the approved supplier. The close records zero point zero four five USDC of principal. Each buyer keeps zero point zero one in protected cash. The wallet fee ceiling was zero point zero two eight eight USDC.
+
+The owner personally confirmed the transaction in MetaMask. The public explorer shows a successful commit plan call on Business Kernel, at block twenty-eight million, eight hundred forty-two thousand, nine hundred fifty-two. This is the actual transaction from the public application, not a local simulation or a testnet transaction.
+
+The receipt shows zero point zero nine USDC moving from the contract to the approved supplier. The actual network fee was zero point zero one three eight five three two three eight USDC. Thirty-five independent checks passed on the owner Mac and again in Arc Studio, including the exact call, finality, payout, principal, protected cash, and custody.
+
+Here is the live Cloudflare Workers app after settlement. The operation is committed. Cash and debt remain separate: buyer A retains zero point zero one USDC and owes zero point zero one six. The kernel holds zero point zero three five. The same public app displays the confirmed transaction and the books produced from its chain evidence.
+
+A page reload recovered the same hash and nonce as confirmed, with books posted. The persistent ledger has one settlement event, twenty-eight balanced journal lines, and one gas record for this close. Nineteen recovery checks passed. The shared accounting core runs on SQLite in Studio and on SQLite-backed Durable Objects in the public Worker.
+
+The total zero point zero four five USDC principal remains outstanding. Physical delivery is not independently verified, and this is not a bank, commercial credit service, or externally audited product. MetaMask displayed a malicious-site warning during the demonstration. The owner reviewed it personally; this transaction does not clear that classification. The app, repository, original Studio project, contract, and receipt are linked for review.

@@ -1,0 +1,84 @@
+{
+  "status": "verified",
+  "method": "Edited actual Studio/browser captures and a Chrome screencast of read-only live app navigation. The pre-signature review is explicitly identified. No UI or transactions were simulated. Long pauses are trimmed and final frames held for narration.",
+  "voice": "macOS Samantha synthetic narration",
+  "durationSeconds": 162.413,
+  "videoSha256": "b04bdf2409439fc5c32c95c4acefc4f58632f448cd1e95b7a33e7ca47b233f21",
+  "bytes": 4604416,
+  "scenes": [
+    {
+      "title": "Built and checked in Arc Studio",
+      "source": "studio-contract-and-mainnet-checks.png",
+      "caption": "Original workspace \u00b7 same contract, app and accounting core",
+      "voice": "Arc Business Operating Account asks whether a business can fund its next order without spending cash already promised elsewhere. We built and checked the contract, app, and accounting in this Arc Studio workspace. Codex assisted with review, browser operation, and verified exports. This is a controlled demonstration using real USDC on Arc mainnet, with fictional, owner-controlled businesses.",
+      "startSeconds": 0,
+      "durationSeconds": 24.8,
+      "sourceSha256": "4faa504aca9d932fe460038dd5d1e2a7c74f5ff492e52f25d73a39de5f229d0f"
+    },
+    {
+      "title": "The actual review before the owner signed",
+      "source": "purchase-review.png",
+      "caption": "0.09 USDC supplier payout \u00b7 0.045 principal \u00b7 0.01 protected per buyer",
+      "voice": "This review was captured before the owner signed. Three buyers commit one hundred goods units. Their own cash and prefunded credit pay zero point zero nine USDC to the approved supplier. The close records zero point zero four five USDC of principal. Each buyer keeps zero point zero one in protected cash. The wallet fee ceiling was zero point zero two eight eight USDC.",
+      "startSeconds": 24.8,
+      "durationSeconds": 24.066667,
+      "sourceSha256": "62ed431b7cf7b5321bbafcc758219f86d577ba23d78e5a2976a14fddf7abc50c"
+    },
+    {
+      "title": "A real mainnet transaction through the public app",
+      "source": "explorer-confirmed.png",
+      "caption": "1 November 2026 \u00b7 block 28842952 \u00b7 commitPlan(1)",
+      "voice": "The owner personally confirmed the transaction in MetaMask. The public explorer shows a successful commit plan call on Business Kernel, at block twenty-eight million, eight hundred forty-two thousand, nine hundred fifty-two. This is the actual transaction from the public application, not a local simulation or a testnet transaction.",
+      "startSeconds": 48.867,
+      "durationSeconds": 20.178,
+      "sourceSha256": "37dfc12b415a82d5e64a3d1c0574492e069040e83b4556d88f88f0076d4526a4"
+    },
+    {
+      "title": "The payment and actual network fee",
+      "source": "explorer-transfer-fee.png",
+      "caption": "Paid 0.09 USDC \u00b7 actual fee 0.013853238 USDC",
+      "voice": "The receipt shows zero point zero nine USDC moving from the contract to the approved supplier. The actual network fee was zero point zero one three eight five three two three eight USDC. Thirty-five independent checks passed on the owner Mac and again in Arc Studio, including the exact call, finality, payout, principal, protected cash, and custody.",
+      "startSeconds": 69.045,
+      "durationSeconds": 23.141,
+      "sourceSha256": "35e2415d50a4d54b34b4f1d0371d07be8e856e9537e5ac7e50f58280b00c9c92"
+    },
+    {
+      "title": "The live app after settlement",
+      "source": "app-navigation.mp4",
+      "video": true,
+      "caption": "Actual browser recording \u00b7 pauses trimmed \u00b7 no new transaction",
+      "voice": "Here is the live Cloudflare Workers app after settlement. The operation is committed. Cash and debt remain separate: buyer A retains zero point zero one USDC and owes zero point zero one six. The kernel holds zero point zero three five. The same public app displays the confirmed transaction and the books produced from its chain evidence.",
+      "startSeconds": 92.186,
+      "durationSeconds": 20.675,
+      "sourceSha256": "c51b686717b7c2331603cb54a2de7a8a9d3a9cde370f6e886ebe0f9c35b75aef"
+    },
+    {
+      "title": "Recover the original transaction, without paying twice",
+      "source": "recovered-intent.png",
+      "caption": "Same hash and nonce after reload \u00b7 one settlement event \u00b7 one gas record",
+      "voice": "A page reload recovered the same hash and nonce as confirmed, with books posted. The persistent ledger has one settlement event, twenty-eight balanced journal lines, and one gas record for this close. Nineteen recovery checks passed. The shared accounting core runs on SQLite in Studio and on SQLite-backed Durable Objects in the public Worker.",
+      "startSeconds": 112.861,
+      "durationSeconds": 20.78,
+      "sourceSha256": "76bbf6bd912615d076c85ea1e84cf566440afb56ec88bd9eea3998416bf6415b"
+    },
+    {
+      "title": "A controlled demonstration with explicit limits",
+      "source": "account-after-close.png",
+      "caption": "0.045 USDC principal remains outstanding \u00b7 no external security audit",
+      "voice": "The total zero point zero four five USDC principal remains outstanding. Physical delivery is not independently verified, and this is not a bank, commercial credit service, or externally audited product. MetaMask displayed a malicious-site warning during the demonstration. The owner reviewed it personally; this transaction does not clear that classification. The app, repository, original Studio project, contract, and receipt are linked for review.",
+      "startSeconds": 133.641,
+      "durationSeconds": 28.772,
+      "sourceSha256": "9df3e1d98b905ea9969400a4a69775e90d56b2657fd0bc8bf88923e4d60d669f"
+    }
+  ],
+  "verification": {
+    "renderedScenesVisuallyReviewed": 7,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "width": 1920,
+    "height": 1080,
+    "durationSeconds": 162.434,
+    "assetSizeWithinLimit": true,
+    "financialFactsMatchIndependentReceipt": true
+  }
+}

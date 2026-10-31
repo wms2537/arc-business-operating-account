@@ -1,0 +1,110 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.933
+Arc Business Operating Account asks whether a business can fund its next order
+without spending cash already promised elsewhere.
+
+00:00:07.933 --> 00:00:13.779
+We built and checked the contract, app, and accounting in this Arc Studio
+workspace.
+
+00:00:13.779 --> 00:00:17.537
+Codex assisted with review, browser operation, and verified exports.
+
+00:00:17.537 --> 00:00:23.800
+This is a controlled demonstration using real USDC on Arc mainnet, with
+fictional, owner-controlled businesses.
+
+00:00:24.800 --> 00:00:27.683
+This review was captured before the owner signed.
+
+00:00:27.683 --> 00:00:30.206
+Three buyers commit one hundred goods units.
+
+00:00:30.206 --> 00:00:35.973
+Their own cash and prefunded credit pay zero point zero nine USDC to the
+approved supplier.
+
+00:00:35.973 --> 00:00:39.938
+The close records zero point zero four five USDC of principal.
+
+00:00:39.938 --> 00:00:43.542
+Each buyer keeps zero point zero one in protected cash.
+
+00:00:43.542 --> 00:00:47.867
+The wallet fee ceiling was zero point zero two eight eight USDC.
+
+00:00:48.867 --> 00:00:52.063
+The owner personally confirmed the transaction in MetaMask.
+
+00:00:52.063 --> 00:01:01.252
+The public explorer shows a successful commit plan call on Business Kernel, at
+block twenty-eight million, eight hundred forty-two thousand, nine hundred
+fifty-two.
+
+00:01:01.252 --> 00:01:08.045
+This is the actual transaction from the public application, not a local
+simulation or a testnet transaction.
+
+00:01:09.045 --> 00:01:15.260
+The receipt shows zero point zero nine USDC moving from the contract to the
+approved supplier.
+
+00:01:15.260 --> 00:01:21.863
+The actual network fee was zero point zero one three eight five three two
+three eight USDC.
+
+00:01:21.863 --> 00:01:31.186
+Thirty-five independent checks passed on the owner Mac and again in Arc
+Studio, including the exact call, finality, payout, principal, protected cash,
+and custody.
+
+00:01:32.186 --> 00:01:35.292
+Here is the live Cloudflare Workers app after settlement.
+
+00:01:35.292 --> 00:01:36.673
+The operation is committed.
+
+00:01:36.673 --> 00:01:43.576
+Cash and debt remain separate: buyer A retains zero point zero one USDC and
+owes zero point zero one six.
+
+00:01:43.576 --> 00:01:46.338
+The kernel holds zero point zero three five.
+
+00:01:46.338 --> 00:01:51.861
+The same public app displays the confirmed transaction and the books produced
+from its chain evidence.
+
+00:01:52.861 --> 00:01:57.989
+A page reload recovered the same hash and nonce as confirmed, with books
+posted.
+
+00:01:57.989 --> 00:02:04.582
+The persistent ledger has one settlement event, twenty-eight balanced journal
+lines, and one gas record for this close.
+
+00:02:04.582 --> 00:02:06.047
+Nineteen recovery checks passed.
+
+00:02:06.047 --> 00:02:12.641
+The shared accounting core runs on SQLite in Studio and on SQLite-backed
+Durable Objects in the public Worker.
+
+00:02:13.641 --> 00:02:18.490
+The total zero point zero four five USDC principal remains outstanding.
+
+00:02:18.490 --> 00:02:26.865
+Physical delivery is not independently verified, and this is not a bank,
+commercial credit service, or externally audited product.
+
+00:02:26.865 --> 00:02:30.392
+MetaMask displayed a malicious-site warning during the demonstration.
+
+00:02:30.392 --> 00:02:35.682
+The owner reviewed it personally; this transaction does not clear that
+classification.
+
+00:02:35.682 --> 00:02:41.413
+The app, repository, original Studio project, contract, and receipt are linked
+for review.

@@ -4,7 +4,7 @@ Can a business fund its next order without spending cash already promised elsewh
 
 This Arc Studio application puts protected cash, exact purchase terms, customer escrow, prefunded credit and accounting into one lifecycle. Customer orders and group purchases use the same non-upgradeable Solidity kernel. Owners keep distinct signing authority; funds share contract custody under explicit rules.
 
-**Current status: Arc mainnet contract and setup are verified. The final purchase close and competition submission are pending. The public app is deployed on Cloudflare Workers with persistent SQLite-backed Durable Objects. Its ledger is completing the first live catch-up.** This is a controlled demonstration with fictional businesses and a prefunded lender. It is not a bank or commercial credit service.
+**Current status: the public Cloudflare Workers app completed a verified Arc mainnet purchase on 1 November 2026.** It paid 0.09 USDC to the demo supplier, recorded 0.045 USDC of borrower principal and retained 0.01 USDC for each buyer. The principal remains outstanding. Competition submission is pending. This is a controlled demonstration with fictional businesses and a prefunded lender, not a bank or commercial credit service.
 
 [Public mainnet app](https://arc-business-operating-account.swmengappdev.workers.dev/) · [Arc Studio project](https://studio.arc.io/app/46704d22-91ee-404d-8ff7-7ad873e3c289) · [Testnet verification report](docs/reviews/arc-testnet-rehearsal-2026-10-31.md) · [Source provenance](docs/source-provenance.json)
 
@@ -25,7 +25,7 @@ The app now recognizes Arc Mainnet 5042 separately from Arc Testnet 5042002 and 
 
 ## Bounded mainnet preparation
 
-The owner approved a 0.75 USDC total demo budget. The preparation uses 0.225 USDC of business capital, fixed gas ceilings and dedicated keys retained privately on the owner Mac. The app permits one paid group-close attempt from the approved operator, passes its fee ceilings to the wallet, and blocks a second paid attempt after a revert. A human must execute financial actions. The owner executed the funding and setup. The mainnet kernel is `0xc7e3f2C1982207948147B6aa156a819eB826941D`; 38 setup transactions passed 577 independent checks. The group remains open before the final application close.
+The owner approved a 0.75 USDC total demo budget. The preparation uses 0.225 USDC of business capital, fixed gas ceilings and dedicated keys retained privately on the owner Mac. The app permits one paid group-close attempt from the approved operator, passes its fee ceilings to the wallet, and blocks a second paid attempt after a revert. A human must execute financial actions. The owner executed the funding and setup. The mainnet kernel is `0xc7e3f2C1982207948147B6aa156a819eB826941D`; 38 setup transactions passed 577 independent checks. The owner then confirmed the exact application close in MetaMask. It passed 35 independent transaction and balance checks. The actual close fee was 0.013853238 USDC; total funding, setup and close gas was 0.216463569 USDC. The public ledger retained one settlement event and one gas record after page reload, with 19 recovery checks passing. [Mainnet result and limits](docs/mainnet-demo-2026-11-01.md) · [Transaction](https://explorer.arc.io/tx/0x38e80b478e7ed0c3158d270d1364e0df648c08b25353e3bc3ef5cd55221d03bd).
 
 The new operator and wallet tests passed 16 checks. Together with the existing network suite, Studio passed 33 unit checks, 182 accounting checks, 47 browser checks, type/lint checks and the production build. The operator/wallet tests also passed on the owner Mac. [Human-operated workflow](docs/mainnet-operator.md) · [Verification receipt](docs/evidence/mainnet-operator-checks.json).
 
@@ -74,4 +74,8 @@ The Workers configuration is in `cloudflare/wrangler.jsonc`. It uses a permanent
 
 Run `bun install --frozen-lockfile` in both the repository root and `cloudflare/`, build the frontend with `bunx vite build`, then run `bun run types`, `bun run typecheck`, `bun run test`, and `bun run dry-run` inside `cloudflare/`. Deployment is a separate step after verification.
 
+The public deployment is https://arc-business-operating-account.swmengappdev.workers.dev/. It runs without the owner Mac and retains the books in a Durable Object. Its deployment and source-parity records are in `docs/evidence/cloudflare-deployment.json` and `docs/evidence/cloudflare-source-checks.json`.
+
 The pinned Workers runtime supports compatibility date `2026-10-30`, which is used for both testing and deployment. The 10 local Workers tests cover projection parity with Studio, real object eviction, rollback, isolation, request limits, large evidence, and catch-up alarms. Passing them does not by itself establish a remote deployment.
+
+[Mainnet walkthrough](https://arc-business-operating-account.swmengappdev.workers.dev/demo/) · [Direct MP4](https://arc-business-operating-account.swmengappdev.workers.dev/demo/mainnet-walkthrough.mp4)
