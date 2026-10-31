@@ -1,0 +1,22 @@
+{
+  "status": "deployed-initial-ledger-sync-in-progress",
+  "application": "https://arc-business-operating-account.swmengappdev.workers.dev/",
+  "sourceCommit": "c1e719bea6a6eafc475ba828583ea53f1d8a9f9d",
+  "workerVersion": "077e5118-56d8-4c81-bf21-70f1710613aa",
+  "chainId": 5042,
+  "kernel": "0xc7e3f2C1982207948147B6aa156a819eB826941D",
+  "mainnetSetupChecks": 577,
+  "runtimeTests": 10,
+  "mainnetCloseSent": false,
+  "competitionSubmitted": false,
+  "explorerSourceVerification": {
+    "status": "exact-match",
+    "url": "https://explorer.arc.io/address/0xc7e3f2C1982207948147B6aa156a819eB826941D?tab=contract",
+    "method": "Blockscout Bytecode Database",
+    "compiler": "v0.8.28+commit.7893614a",
+    "evm": "cancun",
+    "optimizerRuns": 1,
+    "verifiedAtDisplayed": "Oct 31, 2026 20:39:01"
+  },
+  "observedAt": "2026-10-31T15:39:45.902022+00:00"
+}

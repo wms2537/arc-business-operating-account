@@ -4,9 +4,9 @@ Can a business fund its next order without spending cash already promised elsewh
 
 This Arc Studio application puts protected cash, exact purchase terms, customer escrow, prefunded credit and accounting into one lifecycle. Customer orders and group purchases use the same non-upgradeable Solidity kernel. Owners keep distinct signing authority; funds share contract custody under explicit rules.
 
-**Current status: Arc mainnet contract and setup are verified. The final purchase close and competition submission are pending. Cloudflare Workers hosting has passed local runtime tests and is being prepared for deployment.** This is a controlled demonstration with fictional businesses and a prefunded lender. It is not a bank or commercial credit service.
+**Current status: Arc mainnet contract and setup are verified. The final purchase close and competition submission are pending. The public app is deployed on Cloudflare Workers with persistent SQLite-backed Durable Objects. Its ledger is completing the first live catch-up.** This is a controlled demonstration with fictional businesses and a prefunded lender. It is not a bank or commercial credit service.
 
-[Arc Studio project](https://studio.arc.io/app/46704d22-91ee-404d-8ff7-7ad873e3c289) · [Testnet verification report](docs/reviews/arc-testnet-rehearsal-2026-10-31.md) · [Source provenance](docs/source-provenance.json)
+[Public mainnet app](https://arc-business-operating-account.swmengappdev.workers.dev/) · [Arc Studio project](https://studio.arc.io/app/46704d22-91ee-404d-8ff7-7ad873e3c289) · [Testnet verification report](docs/reviews/arc-testnet-rehearsal-2026-10-31.md) · [Source provenance](docs/source-provenance.json)
 
 ## What works
 
@@ -21,7 +21,7 @@ Independent verification passed **1,393 public-chain checks across 140 transacti
 
 ## Mainnet adapter status
 
-The app now recognizes Arc Mainnet 5042 separately from Arc Testnet 5042002 and local Anvil 31337. Its parser, wallet chain, paced RPC, finalized event capture and native-USDC fee labels are covered by 17 network tests, including wrong-network and altered-runtime rejection. All 182 accounting and 47 browser regression checks still pass. Solidity is unchanged. This does not prove a live mainnet deployment. The official Blockdaemon alternate RPC is available; the primary RPC returned HTTP403 in the build environment. [Adapter receipt](docs/evidence/mainnet-support-checks.json).
+The app now recognizes Arc Mainnet 5042 separately from Arc Testnet 5042002 and local Anvil 31337. Its parser, wallet chain, paced RPC, finalized event capture and native-USDC fee labels are covered by 17 network tests, including wrong-network and altered-runtime rejection. All 182 accounting and 47 browser regression checks still pass. Solidity is unchanged. These adapter checks are separate from the mainnet deployment and setup verification below. The official Blockdaemon alternate RPC is available; the primary RPC returned HTTP403 in the build environment. [Adapter receipt](docs/evidence/mainnet-support-checks.json).
 
 ## Bounded mainnet preparation
 
