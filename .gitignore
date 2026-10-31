@@ -17,3 +17,7 @@ public/rehearsal/
 
 # Runtime demo evidence is exported deliberately after verification.
 docs/evidence/arc-mainnet/rehearsal/
+
+cloudflare/.wrangler/
+
+cloudflare/.dev.vars*

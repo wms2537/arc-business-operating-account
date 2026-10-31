@@ -8,7 +8,15 @@ const queues = new Map<string, Queue>();
 export function arcRpcTransport(url: string) {
   let existing = queues.get(url);
   if (!existing) { existing = { tail: Promise.resolve(), nextAt: 0 }; queues.set(url, existing); }
-  const queue = existing;
+  return queuedTransport(url, existing);
+}
+
+/** A Worker refresh owns its I/O queue; no promises cross request contexts. */
+export function isolatedArcRpcTransport(url: string) {
+  return queuedTransport(url, { tail: Promise.resolve(), nextAt: 0 });
+}
+
+function queuedTransport(url: string, queue: Queue) {
   const fetchFn: HttpFetch = (...args) => {
     const result = queue.tail.then(async () => {
       const delay = queue.nextAt - Date.now();

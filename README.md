@@ -4,7 +4,7 @@ Can a business fund its next order without spending cash already promised elsewh
 
 This Arc Studio application puts protected cash, exact purchase terms, customer escrow, prefunded credit and accounting into one lifecycle. Customer orders and group purchases use the same non-upgradeable Solidity kernel. Owners keep distinct signing authority; funds share contract custody under explicit rules.
 
-**Current status: verified Arc Testnet prototype and tested, human-operated mainnet preparation. Mainnet deployment and public hosted app are not complete.** This is a controlled demonstration with fictional businesses and a prefunded lender. It is not a bank or commercial credit service.
+**Current status: Arc mainnet contract and setup are verified. The final purchase close and competition submission are pending. Cloudflare Workers hosting has passed local runtime tests and is being prepared for deployment.** This is a controlled demonstration with fictional businesses and a prefunded lender. It is not a bank or commercial credit service.
 
 [Arc Studio project](https://studio.arc.io/app/46704d22-91ee-404d-8ff7-7ad873e3c289) · [Testnet verification report](docs/reviews/arc-testnet-rehearsal-2026-10-31.md) · [Source provenance](docs/source-provenance.json)
 
@@ -25,7 +25,7 @@ The app now recognizes Arc Mainnet 5042 separately from Arc Testnet 5042002 and 
 
 ## Bounded mainnet preparation
 
-The owner approved a 0.75 USDC total demo budget. The preparation uses 0.225 USDC of business capital, fixed gas ceilings and dedicated keys retained privately on the owner Mac. The app permits one paid group-close attempt from the approved operator, passes its fee ceilings to the wallet, and blocks a second paid attempt after a revert. A human must execute financial actions. No mainnet transaction has been sent by this preparation work.
+The owner approved a 0.75 USDC total demo budget. The preparation uses 0.225 USDC of business capital, fixed gas ceilings and dedicated keys retained privately on the owner Mac. The app permits one paid group-close attempt from the approved operator, passes its fee ceilings to the wallet, and blocks a second paid attempt after a revert. A human must execute financial actions. The owner executed the funding and setup. The mainnet kernel is `0xc7e3f2C1982207948147B6aa156a819eB826941D`; 38 setup transactions passed 577 independent checks. The group remains open before the final application close.
 
 The new operator and wallet tests passed 16 checks. Together with the existing network suite, Studio passed 33 unit checks, 182 accounting checks, 47 browser checks, type/lint checks and the production build. The operator/wallet tests also passed on the owner Mac. [Human-operated workflow](docs/mainnet-operator.md) · [Verification receipt](docs/evidence/mainnet-operator-checks.json).
 
@@ -65,3 +65,13 @@ One fixed lender-owned pool provides only prefunded, bounded credit. Reservation
 The system does not provide bank integration, commercial underwriting, tax reporting, independently verified physical delivery, privacy, autonomous signing or an external security audit. The reviewed runtime has 101 bytes of size headroom. Contract changes require a fresh release-artifact check.
 
 The project uses OpenZeppelin, viem, React and forge-std. Third-party notices and file-level licenses are retained. No new repository-wide license grant is added by this export.
+
+## Cloudflare Workers
+
+The same accounting projector runs on Bun/SQLite in Studio and on SQLite-backed Durable Objects in Workers. Each deployment has its own immutable opening checkpoint. Contiguous headers are retained in bounded batches; oversized evidence is split without discarding it. Posting and cursor advancement remain atomic, and signed delivery receipts retain their original authorization checks.
+
+The Workers configuration is in `cloudflare/wrangler.jsonc`. It uses a permanent Worker URL and durable storage. The backend has no signing key and exposes no transaction-broadcast or arbitrary event-ingestion endpoint. The configured mainnet app permits the approved operator's single reviewed purchase-close flow.
+
+Run `bun install --frozen-lockfile` in both the repository root and `cloudflare/`, build the frontend with `bunx vite build`, then run `bun run types`, `bun run typecheck`, `bun run test`, and `bun run dry-run` inside `cloudflare/`. Deployment is a separate step after verification.
+
+The pinned Workers runtime supports compatibility date `2026-10-30`, which is used for both testing and deployment. The 10 local Workers tests cover projection parity with Studio, real object eviction, rollback, isolation, request limits, large evidence, and catch-up alarms. Passing them does not by itself establish a remote deployment.

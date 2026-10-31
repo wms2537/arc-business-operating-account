@@ -10,6 +10,7 @@ import {
   hash,
   hex,
   array,
+  json,
 } from "../src/lib/boundary";
 export type RawLog = {
   address: Address;
@@ -121,6 +122,13 @@ export async function captureBlock(client:PublicClient,height:bigint):Promise<Ra
 }
 /** Retain contiguous finalized headers and only this deployment's relevant receipts. */
 export async function captureDeploymentRange(client:PublicClient,from:bigint,to:bigint,scope:Scope):Promise<RawBlock[]>{
+ return captureRange(client,from,to,scope,Number.POSITIVE_INFINITY,10);
+}
+/** Return a contiguous prefix when retained evidence reaches the Worker memory budget. */
+export async function captureDeploymentPrefix(client:PublicClient,from:bigint,to:bigint,scope:Scope):Promise<RawBlock[]>{
+ return captureRange(client,from,to,scope,262144,5);
+}
+async function captureRange(client:PublicClient,from:bigint,to:bigint,scope:Scope,byteLimit:number,headerBatch:number):Promise<RawBlock[]>{
  if(to<from)return[];if(to-from+1n>100n)throw Error('Deployment capture is limited to 100 blocks per batch');
  const anchor=await client.getBlock({blockNumber:to});if(!anchor.hash)throw Error('Capture anchor is not confirmed');
  const party=pad(scope.kernelAddress,{size:32}),range={fromBlock:toHex(from),toBlock:toHex(to)};
@@ -136,18 +144,24 @@ export async function captureDeploymentRange(client:PublicClient,from:bigint,to:
   const key=height.toString(),prior=logBlocks.get(key),canonical=log.blockHash.toLowerCase();if(prior&&prior!==canonical)throw Error('Conflicting log block hashes');
   logBlocks.set(key,canonical);candidates.add(log.transactionHash.toLowerCase());
  }
- const blocks:RawBlock[]=[];let previous:Hex|undefined;
- for(let base=from;base<=to;base+=10n){
-  const heights=Array.from({length:Number(to-base+1n<10n?to-base+1n:10n)},(_,i)=>base+BigInt(i));
+ const blocks:RawBlock[]=[];let previous:Hex|undefined,bytes=0;
+ capture:for(let base=from;base<=to;base+=BigInt(headerBatch)){
+  const count=to-base+1n<BigInt(headerBatch)?to-base+1n:BigInt(headerBatch);
+  const heights=Array.from({length:Number(count)},(_,i)=>base+BigInt(i));
   const headers=await Promise.all(heights.map(height=>client.getBlock({blockNumber:height,includeTransactions:true})));
   for(let i=0;i<headers.length;i++){const height=heights[i],block=headers[i];if(!block.hash||block.number!==height)throw Error('Missing canonical block');
   if(previous&&block.parentHash!==previous)throw Error('Noncontiguous capture');
   const logHash=logBlocks.get(height.toString());if(logHash&&logHash!==block.hash.toLowerCase())throw Error('Log/header fork mismatch');
   const selected=block.transactions.filter(tx=>candidates.has(tx.hash.toLowerCase())||isDirectDeploymentCall(tx,scope));
   const transactions:RawTransaction[]=[];for(const tx of selected)transactions.push(await captureReceipt(client,tx,block.hash,height));
-  blocks.push(parseRawBlock({height:Number(height),hash:block.hash,parent:block.parentHash,timestamp:Number(block.timestamp),transactions:transactions.sort((a,b)=>a.index-b.index)}));previous=block.hash;
+  const captured=parseRawBlock({height:Number(height),hash:block.hash,parent:block.parentHash,timestamp:Number(block.timestamp),transactions:transactions.sort((a,b)=>a.index-b.index)}),size=json(captured).length;
+  if(blocks.length&&bytes+size>byteLimit)break capture;
+  blocks.push(captured);previous=block.hash;bytes+=size;
+  if(bytes>=byteLimit)break capture;
  }
  }
- const canonical=await client.getBlock({blockNumber:to});if(canonical.hash!==anchor.hash||previous!==anchor.hash)throw Error('Chain changed during bounded capture');
+ const last=blocks[blocks.length-1];if(!last)throw Error('No block captured');
+ const canonical=await client.getBlock({blockNumber:BigInt(last.height)}),endCanonical=BigInt(last.height)===to?canonical:await client.getBlock({blockNumber:to});
+ if(canonical.hash!==last.hash||endCanonical.hash!==anchor.hash)throw Error('Chain changed during bounded capture');
  return blocks;
 }

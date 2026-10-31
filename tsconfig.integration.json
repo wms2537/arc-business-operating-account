@@ -29,7 +29,9 @@
     "scripts/arc-*.ts",
     "tests/network-support.test.ts",
     "tests/mainnet-operator.test.ts",
-    "tests/mainnet-wallet.test.ts"
+    "tests/mainnet-wallet.test.ts",
+    "tests/storage-ranges.test.ts",
+    "tests/capture-prefix.test.ts"
   ],
   "exclude": [
     "tests/foundation-red.ts",

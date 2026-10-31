@@ -1,13 +1,14 @@
 import { type PublicClient } from "viem";
 import { KERNEL_ABI } from "../src/lib/kernel-abi";
 import { validateDeployment, networkSettings } from "../src/lib/deployment";
-import { captureBlock, captureDeploymentRange } from "./chain";
-import { Books } from "./books";
+import { captureBlock, captureDeploymentPrefix } from "./chain";
+import { type Books } from "./books-core";
 export async function syncBooks(
   client: PublicClient,
   books: Books,
   maxBlocks = 1000,
 ): Promise<number> {
+  books.project();
   await validateDeployment(client, books.manifest);
   const p = books.progress();
   const current = await client.getBlock({ blockNumber: BigInt(p.height) });
@@ -27,9 +28,13 @@ export async function syncBooks(
       ? BigInt(p.height) + BigInt(batchLimit)
       : target;
   if(networkSettings(books.manifest.environment).arc){
-    for(const block of await captureDeploymentRange(client,BigInt(p.height)+1n,end,books.manifest))books.capture(block);
+    books.captureRange(await captureDeploymentPrefix(client,BigInt(p.height)+1n,end,books.manifest));
   }else{
-    for(let n=BigInt(p.height)+1n;n<=end;n++)books.capture(await captureBlock(client,n));
+    for(let start=BigInt(p.height)+1n;start<=end;start+=100n){
+      const blocks=[];const stop=start+99n<end?start+99n:end;
+      for(let n=start;n<=stop;n++)blocks.push(await captureBlock(client,n));
+      books.captureRange(blocks);
+    }
   }
   const count = books.project();
   await reconcileBooks(client, books);

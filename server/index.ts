@@ -1,3 +1,4 @@
+import { recordDeliveryReceipt } from "./receipt-service";
 import { arcRpcTransport } from "../src/lib/arc-rpc";
 import { readFile, mkdir } from "node:fs/promises";
 import { resolve, sep } from "node:path";
@@ -6,14 +7,10 @@ import {
   parseManifest,
   networkSettings,
   deploymentRpcUrl,
-  validateDeployment,
   type DeploymentManifest,
 } from "../src/lib/deployment";
-import { record, text, hex, uint, json } from "../src/lib/boundary";
-import { parseChallenge, receiptMessage } from "../src/lib/receipt-evidence";
+import { record, json } from "../src/lib/boundary";
 import { Books } from "./books";
-import { KERNEL_ABI } from "../src/lib/kernel-abi";
-import { sameAddress } from "../src/lib/boundary";
 import { syncBooks, reconcileBooks } from "./sync";
 const root = resolve("dist"),
   dataDir = resolve(process.env.BOOKS_DATA_DIR ?? "data/books");
@@ -159,57 +156,7 @@ const server = Bun.serve({
               "Books must be synchronized before recording delivery evidence",
             );
           const value = await body(request);
-          await validateDeployment(r.client, r.manifest);
-          const requested =
-            url.pathname === "/api/receipt/challenge"
-              ? {
-                  planId: uint(value.planId).toString(),
-                  buyerAccount: uint(value.buyerAccount).toString(),
-                }
-              : parseChallenge(value.challenge);
-          const saved = r.books.progress().state.plans[requested.planId];
-          if (!saved) throw Error("Plan has not been indexed");
-          const block = await r.client.getBlock();
-          const [plan, account] = await Promise.all([
-            r.client.readContract({
-              address: r.manifest.kernelAddress,
-              abi: KERNEL_ABI,
-              functionName: "getPlan",
-              args: [BigInt(requested.planId)],
-              blockNumber: block.number,
-            }),
-            r.client.readContract({
-              address: r.manifest.kernelAddress,
-              abi: KERNEL_ABI,
-              functionName: "getAccount",
-              args: [BigInt(requested.buyerAccount)],
-              blockNumber: block.number,
-            }),
-          ]);
-          const owner =
-            r.books.progress().state.accounts[requested.buyerAccount]?.owner;
-          if (
-            plan[0] !== 0 ||
-            plan[1] !== 1 ||
-            plan[2] !== saved.hash ||
-            !owner ||
-            !sameAddress(owner, account[0])
-          )
-            throw Error(
-              "Live chain does not confirm the recorded group allocation",
-            );
-          if (url.pathname === "/api/receipt/challenge") {
-            const challenge = r.books.issueChallenge(
-              uint(value.planId).toString(),
-              uint(value.buyerAccount).toString(),
-            );
-            return response({ challenge, message: receiptMessage(challenge) });
-          }
-          const result = await r.books.acceptReceipt(
-            parseChallenge(value.challenge),
-            hex(value.signature),
-          );
-          return response({ status: result });
+          return response(await recordDeliveryReceipt(r.client, r.books, url.pathname === "/api/receipt/challenge" ? "challenge" : "confirm", value));
         }
         return response(
           { error: "This endpoint is read only or does not exist" },
